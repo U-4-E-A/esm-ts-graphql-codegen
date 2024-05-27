@@ -1,0 +1,9 @@
+{
+  "extends": ["./tsconfig.base.json", "./tsconfig.remix.json"],
+  "include": ["./src"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "esnext",
+    "moduleResolution": "node"
+  }
+}
