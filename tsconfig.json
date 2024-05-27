@@ -1,5 +1,5 @@
 {
-  "extends": ["./tsconfig.base.json", "./tsconfig.remix.json"],
+  "extends": ["./tsconfig.base.json", "./tsconfig.base2.json"],
   "include": ["./src"],
   "compilerOptions": {
     "baseUrl": "./",
