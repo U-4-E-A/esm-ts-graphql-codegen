@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "codegen:schema": "graphql-codegen-esm -c codegen.ts"
+    "codegen": "graphql-codegen-esm -c codegen.ts",
+    "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts"
   },
   "dependencies": {
     "graphql": "^16.8.1"
