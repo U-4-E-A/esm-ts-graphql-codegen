@@ -23,15 +23,15 @@ import path from "path";
 // const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-(async () => {
-  const typesArray = await loadFiles(
-    // `${__dirname}/graphql/schema/types/user.graphql`,
-    `${__dirname}/graphql/schema/types/user.graphql`
-  );
-  console.log(typesArray[0].kind);
-  // const resolvers = mergeResolvers(resolversArray);
-  // console.log(util.inspect(resolvers, { depth: null, showHidden: false }));
-})();
+// (async () => {
+const typesArray = await loadFiles(
+  `${__dirname}/graphql/schema/types/user.graphql`
+  // `${__dirname}/graphql/schema/**/*`
+);
+console.log(typesArray[0].kind);
+// const resolvers = mergeResolvers(resolversArray);
+// console.log(util.inspect(resolvers, { depth: null, showHidden: false }));
+// })();
 
 // export default schema;
 
