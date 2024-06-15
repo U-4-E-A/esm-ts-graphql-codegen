@@ -7,9 +7,7 @@
     "codegen": "graphql-codegen-esm -c codegen.ts",
     "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts"
   },
-  "dependencies": {
-    "graphql": "^16.8.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/introspection": "^4.0.3",
