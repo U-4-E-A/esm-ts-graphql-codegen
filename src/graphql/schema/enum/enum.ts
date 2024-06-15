@@ -8,24 +8,29 @@ import gql from "graphql-tag";
 //     }
 //   }`;
 
-// export const typeDefs = `{
-//   hero {
+export default `
+  enum hero {
+    name
+    appearsIn
+  }
+`;
+
+// export const typeDefs = gql`
+//   enum hero {
 //     name
 //     appearsIn
 //   }
-// }`;
 
-export const typeDefs = gql`
-  extend type Query {
-    isLoggedIn_____________: User!
-    cartItems: [ID!]!
-  }
+//   # extend type Query {
+//   #   isLoggedIn_____________: User!
+//   #   cartItems: [ID!]!
+//   # }
 
-  extend type Launch {
-    isInCart: Boolean!
-  }
+//   # extend type Launch {
+//   #   isInCart: Boolean!
+//   # }
 
-  extend type Mutation {
-    addOrRemoveFromCart(id: ID!): [ID!]!
-  }
-`;
+//   # extend type Mutation {
+//   #   addOrRemoveFromCart(id: ID!): [ID!]!
+//   # }
+// `;

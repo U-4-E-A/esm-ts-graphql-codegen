@@ -22,10 +22,10 @@ const typeDefs = mergeTypeDefs(
   await loadFiles(`${__dirname}/graphql/schema/**/*`)
 );
 // console.log("type defs merged : ", typeDefs["definitions"][3]["fields"]);
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  // resolvers,
-});
-console.log(schema);
+console.log("type defs merged : ", typeDefs["definitions"][0]["values"]);
+// const schema = makeExecutableSchema({
+//   typeDefs,
+//   // resolvers,
+// });
+// console.log(schema);
 // export default schema;
