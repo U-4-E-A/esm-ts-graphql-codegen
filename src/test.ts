@@ -20,21 +20,13 @@ import path from "path";
 //   typeDefs,
 // });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 (async () => {
-  console.log(import.meta.url);
   const typesArray = await loadFiles(
-    "C:/dev/esm-ts-graphql-codegen/src/graphql/schema/types/user.graphql"
-    // path.join(__dirname, "/graphql/schema/types/user.graphql")`
-    // ./graphql/schema/types/user.graphql`
-    // {
-    //   ignoreIndex: true,
-    //   requireMethod: async (path) => {
-    //     return await import(url.pathToFileURL(path));
-    //   },
-    // }
+    // `${__dirname}/graphql/schema/types/user.graphql`,
+    `${__dirname}/graphql/schema/types/user.graphql`
   );
   console.log(typesArray[0].kind);
   // const resolvers = mergeResolvers(resolversArray);
