@@ -24,23 +24,24 @@ import path from "path";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // (async () => {
-const typesArray = await loadFiles(
-  `${__dirname}/graphql/schema/types/user.graphql`
+const typesDefsArray = await loadFiles(
+  // `${__dirname}/graphql/schema/types/user.graphql`
   // `${__dirname}/graphql/schema/**/*`
+  `${__dirname}/graphql/schema/**/*.ts`
 );
-console.log(typesArray[0].kind);
-// const resolvers = mergeResolvers(resolversArray);
-// console.log(util.inspect(resolvers, { depth: null, showHidden: false }));
-// })();
+// console.log("type defs : ", typesDefsArray[0]);
+// console.log(typesDefsArray[0].kind);
 
 // export default schema;
 
-// const typeDefs = mergeTypeDefs(
-//   loadFilesSync([
-//     path.join(__dirname, "../graphql/schema/**/*"),
-//     // path.join(__dirname, '../../../../../graphql/src/schema/**/*')
-//   ])
-// );
+const typeDefs = mergeTypeDefs(
+  typesDefsArray
+  // loadFilesSync([
+  //   path.join(__dirname, "../graphql/schema/**/*"),
+  //   // path.join(__dirname, '../../../../../graphql/src/schema/**/*')
+  // ])
+);
+console.log("type defs merged : ", typeDefs["definitions"][0]["fields"]);
 // // @ts-ignore
 // const resolvers = mergeResolvers(
 //   loadFilesSync(path.join(__dirname, "../graphql/resolvers"))
