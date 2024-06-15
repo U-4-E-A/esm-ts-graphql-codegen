@@ -17,7 +17,7 @@ import gql from "graphql-tag";
 
 export const typeDefs = gql`
   extend type Query {
-    isLoggedIn_____________: Boolean!
+    isLoggedIn_____________: User!
     cartItems: [ID!]!
   }
 
