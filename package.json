@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "codegen:nodemon": "nodemon -L",
+    "codegen:nodemon": "nodemon -L -h",
     "codegen": "graphql-codegen-esm -c codegen.ts",
     "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts",
     "codegen:test:server": "tsx ./src/test.server.ts",
@@ -19,6 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@foundry86/dev-utils": "^1.0.0",
     "@graphql-codegen/add": "^5.0.3",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/introspection": "^4.0.3",

@@ -1,6 +1,6 @@
 import { codegen } from "@graphql-codegen/core";
 // import { type CodegenConfig } from "@graphql-codegen/cli";
-import fs from "fs";
+import fs, { writeFileSync } from "fs";
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { loadFiles } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import * as typescriptPlugin from "@graphql-codegen/typescript";
 import * as typescriptResolversPlugin from "@graphql-codegen/typescript-resolvers";
+import * as typescriptOperationsPlugin from "@graphql-codegen/typescript-operations";
 import * as addPlugin from "@graphql-codegen/add";
 import { buildSchema, printSchema, parse, GraphQLSchema } from "graphql";
 
@@ -42,22 +43,31 @@ const config = {
       typescript: {}, // Here you can pass configuration to the plugin
     },
     {
+      "typescript-resolvers": {},
+    },
+    ,
+    {
+      "typescript-operations": {},
+    },
+    {
       add: {
         content:
           "/* eslint-disable no-redeclare, @typescript-eslint/explicit-function-return-type */ // @typescript-eslint/explicit-function-return-type",
       },
     },
-    {
-      "typescript-resolvers": {},
-    },
   ],
   pluginMap: {
     typescript: typescriptPlugin,
     "typescript-resolvers": typescriptResolversPlugin,
+    "typescript-operations": typescriptOperationsPlugin,
     add: addPlugin,
   },
 };
 
 const output = await codegen(config);
-await fs.writeFile(`./src/types/server.types.ts`, output, () => {});
-console.log("Outputs generated!");
+try {
+  writeFileSync(`./src/types/codegen.ts`, output);
+  console.log("Outputs generated!");
+} catch (e) {
+  console.log("Error writing codegen file!");
+}
