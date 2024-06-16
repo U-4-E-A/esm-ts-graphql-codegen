@@ -9,6 +9,7 @@ import path from "path";
 import * as typescriptPlugin from "@graphql-codegen/typescript";
 import * as typescriptResolversPlugin from "@graphql-codegen/typescript-resolvers";
 import * as addPlugin from "@graphql-codegen/add";
+import { buildSchema, printSchema, parse, GraphQLSchema } from "graphql";
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,7 +34,7 @@ const config = {
   config: { enumsAsConst: true, typesSuffix: "Type" },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
-  // filename: outputFile,
+  filename: outputFile,
   schema: schema,
   plugins: [
     // Each plugin should be an object

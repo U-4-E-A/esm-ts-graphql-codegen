@@ -21,7 +21,7 @@ const resolvers = mergeResolvers(
   await loadFiles(`${DIR_NAME}/graphql/resolvers/**/*`)
 );
 
-const schema = makeExecutableSchema({
+const schema: GraphQLSchema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
@@ -33,7 +33,7 @@ const config = {
   config: { enumsAsConst: true, typesSuffix: "Type" },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
-  // filename: outputFile,
+  filename: outputFile,
   schema: schema,
   plugins: [
     // Each plugin should be an object
