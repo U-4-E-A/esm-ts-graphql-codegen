@@ -7,6 +7,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { fileURLToPath } from "url";
 import path from "path";
 import * as typescriptPlugin from "@graphql-codegen/typescript";
+import * as addPlugin from "@graphql-codegen/add";
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,10 +34,18 @@ const config = {
     // Each plugin should be an object
     {
       typescript: {}, // Here you can pass configuration to the plugin
+      // "typescript-resolvers": {},
+    },
+    {
+      add: {
+        content:
+          "/* eslint-disable no-redeclare, @typescript-eslint/explicit-function-return-type */ // @typescript-eslint/explicit-function-return-type",
+      },
     },
   ],
   pluginMap: {
     typescript: typescriptPlugin,
+    add: addPlugin,
   },
 };
 
