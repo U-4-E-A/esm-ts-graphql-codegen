@@ -6,13 +6,15 @@
   "scripts": {
     "codegen": "graphql-codegen-esm -c codegen.ts",
     "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts",
-    "codegen:test": "tsx ./src/test.ts"
+    "codegen:test:server": "tsx ./src/test.server.ts",
+    "codegen:test:client": "tsx ./src/test.client.ts"
   },
   "dependencies": {},
   "devDependencies": {
     "@graphql-codegen/add": "^5.0.3",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/typescript-operations": "^4.2.1",
     "@graphql-codegen/typescript-resolvers": "^4.1.0",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.4",

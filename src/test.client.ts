@@ -7,7 +7,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { fileURLToPath } from "url";
 import path from "path";
 import * as typescriptPlugin from "@graphql-codegen/typescript";
-import * as typescriptResolversPlugin from "@graphql-codegen/typescript-resolvers";
+import * as typescriptOperationsPlugin from "@graphql-codegen/typescript-operations";
 import * as addPlugin from "@graphql-codegen/add";
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
@@ -47,16 +47,16 @@ const config = {
       },
     },
     {
-      "typescript-resolvers": {},
+      "typescript-operations": {},
     },
   ],
   pluginMap: {
     typescript: typescriptPlugin,
-    "typescript-resolvers": typescriptResolversPlugin,
+    "typescript-operations": typescriptOperationsPlugin,
     add: addPlugin,
   },
 };
 
 const output = await codegen(config);
-await fs.writeFile(`./src/types/schema.ts`, output, () => {});
+await fs.writeFile(`./src/types/client.types.ts`, output, () => {});
 console.log("Outputs generated!");
