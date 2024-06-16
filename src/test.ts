@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 // const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
 
 // (async () => {
 // const typesDefsArray = await loadFiles(
@@ -19,7 +19,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://github.com/ardatan/graphql-tools/issues/1750#issuecomment-655828240
 const typeDefs = mergeTypeDefs(
-  await loadFiles(`${__dirname}/graphql/schema/**/*`)
+  await loadFiles(`${DIR_NAME}/graphql/schema/**/*`)
 );
 // console.log("type defs merged : ", typeDefs["definitions"][3]["fields"]);
 console.log("type defs merged : ", typeDefs["definitions"][0]["values"]);
