@@ -2,3 +2,29 @@ type User {
   id: ID!
   username: String!
 }
+
+type Mutation {
+  loginUser(input: UserLoginInput!): LoginUserResponse!
+  logoutUser(id: String!): LogoutUserResponse!
+}
+
+type UserLoginInput {
+  username: String!
+  Password: String!
+}
+
+type LoginUserResponse {
+  ok: Boolean!
+}
+
+type Query {
+  getUser(id: String!): PublicUser
+}
+
+type LogoutUserResponse {
+  ok: Boolean!
+}
+
+type PublicUser {
+  id: String!
+}

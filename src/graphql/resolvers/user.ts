@@ -5,11 +5,7 @@ const mutation = {
 };
 
 const query = {
-  user: async (
-    _: any,
-    { id: string },
-    { currentUser, confirmCurrentUser, db }: any
-  ) => {
+  getUser: async (_: any, { currentUser, confirmCurrentUser, db }: any) => {
     //
   },
 };

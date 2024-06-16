@@ -1,33 +1,26 @@
-import { mergeTypeDefs } from "@graphql-tools/merge";
+import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { loadFiles } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { fileURLToPath } from "url";
 import path from "path";
 import { pathToFileURL } from "url";
 
-// const typesArray = loadFilesSync(
-//   `${pathToFileURL(__dirname).href}/graphql/schema/**/*`
-// );
-// console.log("typesArray : ", typesArray);
-
-// const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-// const __dirname = path.dirname(__filename); // get the name of the directory
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
 // console.log("__filename");
 const typeDefs = mergeTypeDefs(
   await loadFiles(`${DIR_NAME}/graphql/schema/**/*`)
-  // loadFilesSync(
-  //   `${pathToFileURL(__dirname).href}/src/graphql/schema/types/user.ts`
-  // )
-  // loadFilesSync(`./src/graphql/schema/**/*`)
-  // loadFilesSync(`${__dirname}/graphql/schema/**/*`)
-  // loadFilesSync(`${pathToFileURL(__dirname).href}/graphql/schema/**/*`)
-  // loadFilesSync(`file://${__dirname}/graphql/schema/**/*`)
-  // loadFilesSync(typesArray)
 );
-console.log(typeDefs);
+
+// const resolvers = mergeResolvers(loadFilesSync(path.join(__dirname, '../graphql/resolvers')))
+const resolvers = mergeResolvers(
+  await loadFiles(`${DIR_NAME}/graphql/resolvers/**/*`)
+);
+
+// console.log(typeDefs);
+
 const schema = makeExecutableSchema({
   typeDefs,
+  resolvers,
 });
 
 export default schema;
