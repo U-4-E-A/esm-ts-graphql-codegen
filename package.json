@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "codegen": "graphql-codegen-esm -c codegen.ts",
-    "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts"
+    "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts",
+    "codegen:test": "tsx ./src/test.ts"
   },
   "dependencies": {},
   "devDependencies": {

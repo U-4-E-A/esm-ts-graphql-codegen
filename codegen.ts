@@ -7,6 +7,7 @@ import { pathToFileURL } from "url";
 const config: CodegenConfig = {
   // schema: `./src/schema.server.ts`,
   schema: `${pathToFileURL(__dirname).href}/src/schema.server.ts`,
+  emitLegacyCommonJSImports: false,
   require: ["tsx/esm", "tsconfig-paths/register.js"],
   generates: {
     [`./src/types/schema.json`]: {
