@@ -23,7 +23,7 @@ const schema = makeExecutableSchema({
 const outputFile = "relative/pathTo/filename.ts";
 const config = {
   documents: [],
-  config: {},
+  config: { enumsAsConst: true },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
   filename: outputFile,
@@ -40,5 +40,5 @@ const config = {
 };
 
 const output = await codegen(config);
-await fs.writeFile(`./src/types/schema.json`, output, () => {});
+await fs.writeFile(`./src/types/schema.ts`, output, () => {});
 console.log("Outputs generated!");
