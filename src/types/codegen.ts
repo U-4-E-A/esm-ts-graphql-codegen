@@ -17,12 +17,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export const HeroType = {
-  NameType: 'name',
-  AppearsInType: 'appearsIn'
-} as const;
-
-export type HeroType = typeof HeroType[keyof typeof HeroType];
 export type UserType = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
@@ -76,6 +70,12 @@ export type PublicUserType = {
   id: Scalars['String']['output'];
 };
 
+export const HeroType = {
+  NameType: 'name',
+  AppearsInType: 'appearsIn'
+} as const;
+
+export type HeroType = typeof HeroType[keyof typeof HeroType];
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -147,7 +147,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypesType = {
-  hero: HeroType;
   User: ResolverTypeWrapper<UserType>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -158,6 +157,7 @@ export type ResolversTypesType = {
   Query: ResolverTypeWrapper<{}>;
   LogoutUserResponse: ResolverTypeWrapper<LogoutUserResponseType>;
   PublicUser: ResolverTypeWrapper<PublicUserType>;
+  hero: HeroType;
 };
 
 /** Mapping between all available schema types and the resolvers parents */

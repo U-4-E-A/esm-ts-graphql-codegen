@@ -10,6 +10,7 @@ import * as typescriptPlugin from "@graphql-codegen/typescript";
 import * as typescriptResolversPlugin from "@graphql-codegen/typescript-resolvers";
 import * as typescriptOperationsPlugin from "@graphql-codegen/typescript-operations";
 import * as addPlugin from "@graphql-codegen/add";
+// import { infoLogger } from "@foundry86/dev-utils/console";
 import { buildSchema, printSchema, parse, GraphQLSchema } from "graphql";
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
@@ -67,7 +68,7 @@ const config = {
 const output = await codegen(config);
 try {
   writeFileSync(`./src/types/codegen.ts`, output);
-  console.log("Outputs generated!");
+  // infoLogger("Outputs generated!");
 } catch (e) {
   console.log("Error writing codegen file!");
 }
