@@ -1,4 +1,5 @@
 import { codegen } from "@graphql-codegen/core";
+// import { type CodegenConfig } from "@graphql-codegen/cli";
 import fs from "fs";
 import { mergeTypeDefs } from "@graphql-tools/merge";
 import { loadFiles } from "@graphql-tools/load-files";
@@ -23,10 +24,10 @@ const schema = makeExecutableSchema({
 const outputFile = "relative/pathTo/filename.ts";
 const config = {
   documents: [],
-  config: { enumsAsConst: true },
+  config: { enumsAsConst: true, typesSuffix: "Type" },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
-  filename: outputFile,
+  // filename: outputFile,
   schema: schema,
   plugins: [
     // Each plugin should be an object
