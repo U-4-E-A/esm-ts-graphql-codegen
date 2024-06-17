@@ -1,6 +1,6 @@
 import { codegen } from "@graphql-codegen/core";
 // import { type CodegenConfig } from "@graphql-codegen/cli";
-import fs, { writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { loadFiles } from "@graphql-tools/load-files";
 import { makeExecutableSchema } from "@graphql-tools/schema";
@@ -20,13 +20,13 @@ const typeDefs = mergeTypeDefs(
   await loadFiles(`${DIR_NAME}/graphql/schema/**/*`)
 );
 
-const resolvers = mergeResolvers(
-  await loadFiles(`${DIR_NAME}/graphql/resolvers/**/*`)
-);
+// const resolvers = mergeResolvers(
+//   await loadFiles(`${DIR_NAME}/graphql/resolvers/**/*`)
+// );
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers,
+  // resolvers,
 });
 
 // const schema: GraphQLSchema = buildSchema(`type A { name: String }`);
@@ -36,35 +36,41 @@ const config = {
   documents: [`./graphql/documents/user.mutations.graphql`],
   // documents: [`${DIR_NAME}/graphql/documents/**/*`],
   // documents: [`${DIR_NAME}/graphql/documents/user.mutations.graphql`],
-  config: { enumsAsConst: true, typesSuffix: "Type" },
+  config: {
+    enumsAsConst: true,
+    typesSuffix: "Type",
+    // fetcher: "graphql-request",
+    // exposeQueryKeys: true,
+    // exposeFetcher: true,
+  },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
   filename: outputFile,
   schema: schema,
   plugins: [
-    // Each plugin should be an object
-    {
-      typescript: {}, // Here you can pass configuration to the plugin
-    },
-    {
-      "typescript-resolvers": {},
-    },
-    ,
-    {
-      "typescript-operations": {},
-    },
-    {
-      add: {
-        content:
-          "/* eslint-disable no-redeclare, @typescript-eslint/explicit-function-return-type */ // @typescript-eslint/explicit-function-return-type",
-      },
-    },
+    // // Each plugin should be an object
+    // {
+    //   typescript: {}, // Here you can pass configuration to the plugin
+    // },
+    // {
+    //   "typescript-resolvers": {},
+    // },
+    // ,
+    // {
+    //   "typescript-operations": {},
+    // },
+    // {
+    //   add: {
+    //     content:
+    //       "/* eslint-disable no-redeclare, @typescript-eslint/explicit-function-return-type */ // @typescript-eslint/explicit-function-return-type",
+    //   },
+    // },
   ],
   pluginMap: {
-    typescript: typescriptPlugin,
-    "typescript-resolvers": typescriptResolversPlugin,
-    "typescript-operations": typescriptOperationsPlugin,
-    add: addPlugin,
+    // typescript: typescriptPlugin,
+    // "typescript-resolvers": typescriptResolversPlugin,
+    // "typescript-operations": typescriptOperationsPlugin,
+    // add: addPlugin,
   },
 };
 

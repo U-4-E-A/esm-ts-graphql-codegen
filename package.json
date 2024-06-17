@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "codegen:generate": "tsx ./src/test.server.generate.ts",
     "codegen:nodemon": "nodemon -L",
     "codegen": "graphql-codegen-esm -c codegen.ts",
     "codegen:inline": "graphql-codegen-esm -c codegen.inline.ts",
-    "codegen:test:server": "tsx ./src/test.server.ts",
+    "codegen:test:server": "tsx ./src/test.server.generate.ts",
     "codegen:test:client": "tsx ./src/test.client.ts",
     "_codegen:test:server": "tsx --watch --include \"./src/graphql/**.*\" ./src/test.server.ts"
   },
