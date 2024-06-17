@@ -32,7 +32,10 @@ const schema = makeExecutableSchema({
 // const schema: GraphQLSchema = buildSchema(`type A { name: String }`);
 const outputFile = "relative/pathTo/filename.ts";
 const config = {
-  documents: [],
+  // documents: [],
+  documents: [`./graphql/documents/user.mutations.graphql`],
+  // documents: [`${DIR_NAME}/graphql/documents/**/*`],
+  // documents: [`${DIR_NAME}/graphql/documents/user.mutations.graphql`],
   config: { enumsAsConst: true, typesSuffix: "Type" },
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
