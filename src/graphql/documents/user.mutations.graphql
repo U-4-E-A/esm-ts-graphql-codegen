@@ -1,20 +1,5 @@
-# mutation LoginUser($input: UserLoginInput!) {
-#   loginUser(input: $input) {
-#     ok
-#   }
-# }
-
-mutation CreateStaff($input: CreateStaffInput!) {
-  createStaff(input: $input) {
+mutation LoginUser($input: String!) {
+  loginUser(input: $input) {
     ok
-    # firstNameErrors
-    # lastNameErrors
-    # passwordErrors {
-    #   errors
-    #   score
-    # }
-    # emailErrors
-    # locationErrors
-    # emailAlreadyRegisteredError
   }
 }

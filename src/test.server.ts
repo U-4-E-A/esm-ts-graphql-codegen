@@ -4,14 +4,20 @@ import { writeFileSync } from "fs";
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { loadFiles } from "@graphql-tools/load-files";
 import { makeExecutableSchema, mergeSchemas } from "@graphql-tools/schema";
+import { loadSchema, loadDocuments } from "@graphql-tools/load";
 import { fileURLToPath } from "url";
 import path from "path";
 import * as typescriptPlugin from "@graphql-codegen/typescript";
 import * as typescriptResolversPlugin from "@graphql-codegen/typescript-resolvers";
 import * as typescriptOperationsPlugin from "@graphql-codegen/typescript-operations";
 import * as addPlugin from "@graphql-codegen/add";
-// import { infoLogger } from "@foundry86/dev-utils/console";
-import { buildSchema, printSchema, parse, GraphQLSchema } from "graphql";
+import {
+  buildSchema,
+  printSchema,
+  parse,
+  GraphQLSchema,
+  buildASTSchema,
+} from "graphql";
 
 const DIR_NAME = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,30 +30,35 @@ const resolvers = mergeResolvers(
   await loadFiles(`${DIR_NAME}/graphql/resolvers/**/*`)
 );
 
+const documents = await loadFiles(`${DIR_NAME}/graphql/documents/**/*`);
+console.log(documents);
 // console.log(typeDefs);
 
-const mergedSchema = mergeSchemas({
-  // schemas: [BarSchema, BazSchema],
-  typeDefs: typeDefs,
-  resolvers: resolvers,
-});
-
-// console.log(mergedSchema);
-
-// const schema: GraphQLSchema = buildSchema()
-
-// const schema = makeExecutableSchema({
-//   typeDefs,
-//   // resolvers,
+// const mergedSchema = mergeSchemas({
+//   // schemas: [BarSchema, BazSchema],
+//   typeDefs: typeDefs,
+//   resolvers: resolvers,
 // });
 
-// const schema: GraphQLSchema = buildSchema(`type A { name: String }`);
-const outputFile = "relative/pathTo/filename.ts";
+const schemaBlah: GraphQLSchema = buildSchema(`type A { name: String }`);
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+// const schema: GraphQLSchema = buildSchema(`type Mutation {
+//   loginUser(input: UserLoginInput!): LoginUserResponse!
+//   logoutUser(id: String!): LogoutUserResponse!
+// }`);
+const outputFile = `./src/types/codegen.ts`;
 const config = {
-  documents: [],
-  // documents: [`./graphql/documents/user.mutations.graphql`],
+  // schema: schema,
+  schema: parse(printSchema(schemaBlah)),
+  // schema: mergedSchema,
+  // documents: [],
+  documents: documents, // [`./graphql/documents/user.mutations.graphql`],
   // documents: [`${DIR_NAME}/graphql/documents/**/*`],
-  // documents: [`${DIR_NAME}/graphql/documents/user.mutations.graphql`],
   config: {
     enumsAsConst: true,
     typesSuffix: "Type",
@@ -58,7 +69,6 @@ const config = {
   // used by a plugin internally, although the 'typescript' plugin currently
   // returns the string output, rather than writing to a file
   filename: outputFile,
-  schema: mergedSchema, // schema,
   plugins: [
     // Each plugin should be an object
     {
@@ -88,7 +98,7 @@ const config = {
 
 const output = await codegen(config);
 try {
-  writeFileSync(`./src/types/codegen.ts`, output);
+  writeFileSync(outputFile, output);
   // infoLogger("Outputs generated!");
 } catch (e) {
   console.log("Error writing codegen file!");
